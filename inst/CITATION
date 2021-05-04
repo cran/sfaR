@@ -10,14 +10,14 @@ citEntry(entry="Manual",
             as.person("Laure Latruffe")),
          year = year,
          note = vers,
-         # url = "https://CRAN.R-project.org/package=sfaR/",
+         url = "https://CRAN.R-project.org/package=sfaR/",
 
          textVersion =
          paste("Dakpo KH., Desjeux Y. and Latruffe L. (",
                year,
                "). sfaR: Stochastic Frontier Analysis using R. ",
                vers, ".", 
-              # ", url: https://CRAN.R-project.org/package=sfaR/.", 
+               ", url: https://CRAN.R-project.org/package=sfaR/.", 
                sep=""))
 
 citFooter(paste("See also", sQuote("citation()"), "for citing R.", sep = " "))

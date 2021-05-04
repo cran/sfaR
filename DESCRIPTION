@@ -1,6 +1,6 @@
 Package: sfaR
-Version: 0.0.91
-Date: 2021-03-04
+Version: 0.1.0
+Date: 2021-05-04
 Title: Stochastic Frontier Analysis using R
 Authors@R: c(
    person("K Hervé", "Dakpo", email = "k-herve.dakpo@inrae.fr", role = "aut"),
@@ -24,9 +24,9 @@ License: GPL-3
 Encoding: UTF-8
 LazyData: true
 NeedsCompilation: no
-Packaged: 2021-03-04 13:44:39 UTC; ydesjeux
+Packaged: 2021-05-03 22:03:28 UTC; ydesjeux
 Author: K Hervé Dakpo [aut],
   Yann Desjeux [aut, cre],
   Laure Latruffe [aut]
 Repository: CRAN
-Date/Publication: 2021-03-05 09:30:02 UTC
+Date/Publication: 2021-05-04 04:40:03 UTC
