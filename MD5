@@ -1,10 +1,11 @@
-0bebfcb0936a175311f103ffa551e957 *DESCRIPTION
+9732996e3ce62b6209c07d02fc56329d *DESCRIPTION
 96e20c392ce1c40fbd1fc8b3626dfc2f *NAMESPACE
+6a9cec57813a756659733c9f95214b70 *NEWS.md
 46af90f01dcadbff8d8bf4a0342cdfd8 *R/auxiliaries.R
 d6f0f099689e02e926958e26a788981f *R/coef-summary.R
-e7776ae86b1c7cece5df8cb2ee41eccc *R/coef.R
+7ce1411f2d16f3928717b3487f8f3cc1 *R/coef.R
 9d33340c8178fa4e1e276ea854278d1c *R/efficiencies.R
-055dd47267bee6f10a52435d30ef3df9 *R/fitted.R
+051729653dedce952aca06bda8b41be9 *R/fitted.R
 79b4bec97d510e5b21ce3218b5c4fe60 *R/ic.R
 ec48f0bcc09febca245260b38ce9e4f5 *R/lcmcross-halfnormal-2Classes.R
 e1d3bd0fc118c74ca7d7c6fd3b7233b4 *R/lcmcross-halfnormal-3Classes.R
@@ -29,7 +30,7 @@ bd262d7b7696d4d2fee19edb885ebcaa *R/sfacross.R
 0637564416e8a80f685a0eec4fc0e02a *R/skewnessTest.R
 926e2bd9466365492410ef99ebc3c7fc *R/summary.R
 04274d5305dc08e8c148e2b4a7bbff40 *R/vcov.R
-84ed7cc641f31ffc40a90ccb126cebcc *R/zzz.R
+13d9eede993042d3101598d59fad5655 *R/zzz.R
 509544f6f950471eca90369f68b3737c *data/dairyspain.RData
 365a5b36dd76802aee0f717cebc44f13 *data/electricity.RData
 0fdd7119dbc931af3aafbf956e3ed596 *data/ricephil.RData
@@ -39,7 +40,7 @@ bd262d7b7696d4d2fee19edb885ebcaa *R/sfacross.R
 71d6665b44b8137bd7610b346bffce06 *inst/CITATION
 adc9142ca521c528870c4997ea1afc93 *man/coef.Rd
 54244943161d12a51940a113122944be *man/dairyspain.Rd
-c94e627002c39e361eae5e7d70a06afd *man/efficiencies.Rd
+4a32279dccd87dcd51b7bfb4d6221804 *man/efficiencies.Rd
 894f09d89a8ea1857e06d22808006bdf *man/electricity.Rd
 76f31ee429d23756f0341cfc0f3cd724 *man/fitted.Rd
 5b11dfa1f31c50c5ccdc85d440619228 *man/ic.Rd
