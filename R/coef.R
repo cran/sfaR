@@ -1,9 +1,104 @@
-# coefficients from sfacross ----
+################################################################################
+#                                                                              #
+# R functions for the sfaR package                                             #
+#                                                                              #
+################################################################################
 
+#------------------------------------------------------------------------------#
+# Coefficients extraction                                                      #
+# Models: + Cross sectional & Pooled data                                      #
+#           -Stochastic Frontier Analysis                                      #
+#           -Latent Class Stochastic Frontier Analysis                         #
+#           -Sample selection correction for Stochastic Frontier Model         #
+# Data: Cross sectional data & Pooled data                                     #
+#------------------------------------------------------------------------------#
+
+#' Extract coefficients of stochastic frontier models
+#' 
+#' @description
+#' From an object of class \code{'summary.sfacross'},
+#' \code{'summary.sfalcmcross'}, or \code{'summary.sfaselectioncross'},
+#' \code{\link{coef}} extracts the coefficients, 
+#' their standard errors, z-values, and (asymptotic) P-values.
+#'
+#' From on object of class \code{'sfacross'}, \code{'sfalcmcross'}, or 
+#' \code{'sfaselectioncross'}, it extracts only the estimated coefficients.
+#'
+#' @name coef
+#'
+#' @param object A stochastic frontier model returned by \code{\link{sfacross}}, 
+#' \code{\link{sfalcmcross}}, or \code{\link{sfaselectioncross}}, or an object 
+#' of class \code{'summary.sfacross'}, \code{'summary.sfalcmcross'}, or\cr
+#' \code{'summary.sfaselectioncross'}.
+#' @param extraPar Logical (default = \code{FALSE}). If \code{TRUE}, additional
+#' parameters are returned:
+#'
+#' \code{sigmaSq} = \code{sigmauSq} + \code{sigmavSq}
+#'
+#' \code{lambdaSq} = \code{sigmauSq}/\code{sigmavSq}
+#'
+#' \code{sigmauSq} = \eqn{\exp{(Wu)}} = \eqn{\exp{(\bm{\delta}' \mathbf{Z}_u)}}
+#'
+#' \code{sigmavSq} = \eqn{\exp{(Wv)}} = \eqn{\exp{(\bm{\phi}' \mathbf{Z}_v)}}
+#'
+#' \code{sigma} = \code{sigmaSq}^0.5
+#'
+#' \code{lambda} = \code{lambdaSq}^0.5
+#'
+#' \code{sigmau} = \code{sigmauSq}^0.5
+#'
+#' \code{sigmav} = \code{sigmavSq}^0.5
+#'
+#' \code{gamma} = \code{sigmauSq}/(\code{sigmauSq} + \code{sigmavSq})
+#' @param ... Currently ignored.
+#'
+#' @return For objects of class \code{'summary.sfacross'}, 
+#' \code{'summary.sfalcmcross'}, or \code{'summary.sfaselectioncross'}, 
+#' \code{\link{coef}} returns a matrix with four columns. Namely, the 
+#' estimated coefficients, their standard errors, z-values, 
+#' and (asymptotic) P-values.
+#'
+#' For objects of class \code{'sfacross'}, \code{'sfalcmcross'}, or 
+#' \code{'sfaselectioncross'}, \code{\link{coef}} returns a numeric vector of 
+#' the estimated coefficients. If \code{extraPar = TRUE}, additional parameters, 
+#' detailed in the section \sQuote{Arguments}, are also returned. In the case 
+#' of object of class \code{'sfalcmcross'}, each additional 
+#' parameter ends with \code{'#'} that represents the class number.
+#'
+# @author K Hervé Dakpo
+#'
+#' @seealso \code{\link{sfacross}}, for the stochastic frontier analysis model
+#' fitting function using cross-sectional or pooled data.
+#' 
+#' \code{\link{sfalcmcross}}, for the latent class stochastic frontier analysis
+#' model fitting function using cross-sectional or pooled data.
+#' 
+#' \code{\link{sfaselectioncross}} for sample selection in stochastic frontier 
+#' model fitting function using cross-sectional or pooled data.
+#'
+#' @keywords methods coefficients
+#'
+#' @examples
+#' 
+#' \dontrun{
+#' ## Using data on fossil fuel fired steam electric power generation plants in the U.S.
+#' # Translog SFA (cost function) truncated normal with scaling property
+#' tl_u_ts <- sfacross(formula = log(tc/wf) ~ log(y) + I(1/2 * (log(y))^2) +
+#' log(wl/wf) + log(wk/wf) + I(1/2 * (log(wl/wf))^2) + I(1/2 * (log(wk/wf))^2) +
+#' I(log(wl/wf) * log(wk/wf)) + I(log(y) * log(wl/wf)) + I(log(y) * log(wk/wf)),
+#' udist = 'tnormal', muhet = ~ regu, uhet = ~ regu, data = utility, S = -1,
+#' scaling = TRUE, method = 'mla')
+#' coef(tl_u_ts, extraPar = TRUE)
+#' coef(summary(tl_u_ts))
+#' }
+#'
+#' @aliases coef.sfacross
+#' @export
+# coefficients from sfacross ----------
 coef.sfacross <- function(object, extraPar = FALSE, ...) {
   if (length(extraPar) != 1 || !is.logical(extraPar[1]))
     stop("argument 'extraPar' must be a single logical value",
-         call. = FALSE)
+      call. = FALSE)
   cRes <- object$mlParam
   if (extraPar) {
     if (object$udist == "tnormal") {
@@ -83,9 +178,19 @@ coef.sfacross <- function(object, extraPar = FALSE, ...) {
   return(cRes)
 }
 
-# coefficients from lcmcross ----
+# coefficients from summary.sfacross ----------
+#' @rdname coef
+#' @aliases coef.summary.sfacross
+#' @export
+coef.summary.sfacross <- function(object, ...) {
+  object$mlRes
+}
 
-coef.lcmcross <- function(object, extraPar = FALSE, ...) {
+# coefficients from sfalcmcross ----------
+#' @rdname coef
+#' @aliases coef.sfalcmcross
+#' @export
+coef.sfalcmcross <- function(object, extraPar = FALSE, ...) {
   if (length(extraPar) != 1 || !is.logical(extraPar[1]))
     stop("argument 'extraPar' must be a single logical value",
       call. = FALSE)
@@ -241,3 +346,51 @@ coef.lcmcross <- function(object, extraPar = FALSE, ...) {
   return(cRes)
 }
 
+# coefficients from summary.sfalcmcross ----------
+#' @rdname coef
+#' @aliases coef.summary.sfalcmcross
+#' @export
+coef.summary.sfalcmcross <- function(object, ...) {
+  object$mlRes
+}
+
+# coefficients from sfaselectioncross ----------
+#' @rdname coef
+#' @aliases coef.sfaselectioncross
+#' @export
+coef.sfaselectioncross <- function(object, extraPar = FALSE,
+  ...) {
+  if (length(extraPar) != 1 || !is.logical(extraPar[1]))
+    stop("argument 'extraPar' must be a single logical value",
+      call. = FALSE)
+  cRes <- object$mlParam
+  if (extraPar) {
+    delta <- object$mlParam[(object$nXvar + 1):(object$nXvar +
+      object$nuZUvar)]
+    phi <- object$mlParam[(object$nXvar + object$nuZUvar +
+      1):(object$nXvar + object$nuZUvar + object$nvZVvar)]
+    uHvar <- model.matrix(object$formula, data = object$dataTable[object$dataTable$selectDum ==
+      1, ], rhs = 2)
+    vHvar <- model.matrix(object$formula, data = object$dataTable[object$dataTable$selectDum ==
+      1, ], rhs = 3)
+    Wu <- as.numeric(crossprod(matrix(delta), t(uHvar)))
+    Wv <- as.numeric(crossprod(matrix(phi), t(vHvar)))
+    if (object$nuZUvar > 1 || object$nvZVvar > 1)
+      cat("Variances averaged over observations     \n\n")
+    cRes <- c(cRes, sigmaSq = mean(exp(Wu)) + mean(exp(Wv)),
+      lambdaSq = mean(exp(Wu))/mean(exp(Wv)), sigmauSq = mean(exp(Wu)),
+      sigmavSq = mean(exp(Wv)), sigma = sqrt(mean(exp(Wu)) +
+        mean(exp(Wv))), lambda = sqrt(mean(exp(Wu))/mean(exp(Wv))),
+      sigmau = sqrt(mean(exp(Wu))), sigmav = sqrt(mean(exp(Wv))),
+      gamma = mean(exp(Wu))/(mean(exp(Wu)) + mean(exp(Wv))))
+  }
+  return(cRes)
+}
+
+# coefficients from summary.sfaselectioncross ----------
+#' @rdname coef
+#' @aliases coef.summary.sfaselectioncross
+#' @export
+coef.summary.sfaselectioncross <- function(object, ...) {
+  object$mlRes
+}
